@@ -1,0 +1,11 @@
+{
+  "name": "Zen-BOT",
+  "version": "1.0",
+  "description": "Discord bot for ZenCash",
+  "main": "bot.js",
+  "author": "Amitabha",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "node-fetch": "^2.1.2"
+  }
+}
