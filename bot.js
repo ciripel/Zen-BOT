@@ -5,20 +5,6 @@ const auth = require('./auth.json');
 let cmc_btc = {};
 let svrstats = {};
 
-
-/*function timeConverter(UNIX_timestamp){
-  var a = new Date(UNIX_timestamp * 1000);
-  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var year = a.getFullYear();
-  var month = months[a.getMonth()];
-  var date = a.getDate();
-  var hour = a.getHours();
-  var min = a.getMinutes();
-  var sec = a.getSeconds();
-  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-  return time;
-}*/
-
 client.on('ready', () => {
   fetch('https://api.coinmarketcap.com/v2/ticker/1/')
     .then(res => res.json())
@@ -29,6 +15,17 @@ client.on('ready', () => {
     .then(json => svrstats = json)
     .catch(error => console.log(`Can't connect to https://securenodes.eu.zensystem.io/api/srvstats.\nError: \n-----------\n${error}\n-----------`));
   console.log(`Logged in as ${client.user.tag}!`);
+});
+
+client.on('error', (e) => console.log(`Error on ready ...${e}`));
+
+client.on('reconnecting',() =>
+  console.log(`Bot ${client.user.tag} reconected!`));
+
+client.on('disconnect',() => {
+  console.log(`Bot ${client.user.tag} disconnected ... Attempted reconnecting... `);
+  client.login(auth.token)
+    .catch(error => console.log(`Can't login into discord due to ${error}`));
 });
 
 client.on('message', msg => {
