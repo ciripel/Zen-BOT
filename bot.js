@@ -110,7 +110,7 @@ client.on('message', msg => {
           fetch('https://api.coinmarketcap.com/v2/ticker/1698/')
             .then(res => res.json())
             .then(json => msg.channel.send(`• Current Price•          **${Math.floor(json.data.quotes.USD.price/cmc_btc.data.quotes.USD.price*100000)/100000} BTC** | **${Math.floor(json.data.quotes.USD.price*1000)/1000}$**\n• 24h Volume •           **${Math.floor(json.data.quotes.USD.volume_24h/cmc_btc.data.quotes.USD.price*100)/100} BTC** | **${Math.floor(json.data.quotes.USD.volume_24h)}$**\n• Market Cap•             **${Math.floor(json.data.quotes.USD.market_cap)}$**\n• Circulating Supply• **${Math.floor(json.data.circulating_supply)} ZEN**\n• Locked Coins•          **${42*(svrstats.global.total)} ZEN**\n• 24h Change•            **${json.data.quotes.USD.percent_change_24h}%**\n`))
-            .catch(error => console.log(`Can't connect to https://explorer.vertical.ovh/api/coin.\nError: \n-----------\n${error}\n-----------`));
+            .catch(error => console.log(`Can't connect to https://api.coinmarketcap.com/v2/ticker/1698/.\nError: \n-----------\n${error}\n-----------`));
           break;
         default:
           msg.channel.send('Command not recognized. `?help` to get a list of commands.');
